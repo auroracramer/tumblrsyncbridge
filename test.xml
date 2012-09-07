@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<postset name="siteupdates">
-    <post><date>12/12/1212</date><href>http://post_url</href><type>text</type><title>Test Title</title><body>TEST BODY</body></post><post><date>12/12/1212</date><href>http://post_url</href><type>text</type><title>Test Title</title><body>TEST BODY</body></post><post><date>12/12/1212</date><href>http://post_url</href><type>text</type><title>Test Title</title><body>TEST BODY</body></post><post><date>12/12/1212</date><href>http://post_url</href><type>text</type><title>Test Title</title><body>TEST BODY</body></post><post><date>12/12/1212</date><href>http://post_url</href><type>text</type><title>Test Title</title><body>TEST BODY</body></post><post><date>12/12/1212</date><href>http://post_url</href><type>text</type><title>Test Title</title><body>TEST BODY</body></post><post><date>12/12/1212</date><href>http://post_url</href><type>text</type><title>Test Title</title><body>TEST BODY</body></post><post>
-        <title>Hello</title>
-        <body>World</body>
-    </post>
-</postset>
