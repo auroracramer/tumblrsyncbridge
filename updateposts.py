@@ -29,16 +29,19 @@ def get_filename(post_file):
     return post_file.name.split(r'/')[-1][-4]
 
 def get_etree(post_file):
-    return ET.fromstring(post_file.read())
+    return ET.ElementTree(ET.fromstring(post_file.read()))
+
+def save_etree(etree, xmlfile):
+    xmlfile.seek(0)
+    etree.write(xmlfile,"utf-8", True)
 
 def get_posts_uri(tag, limit=20, type = ''):
+    """ Returns the URI that returns JSON file with posts of a certain tag"""
     if type:
         type = r'/' + type
     limit = str(limit)
     tag = tag.replace(' ', '+')
-    return r'http://api.tumblr.com/v2/blog/' +
-           BASEHOSTNAME + r'/posts' + type + 
-           r'?api_key=' + APIKEY + r'&limit=' + limit
+    return 'http://api.tumblr.com/v2/blog/' + BASEHOSTNAME + '/posts' + type + '?api_key=' + APIKEY + '&limit=' + limit
 
 def init_posts(post_filenames):
     """ Initializes XML post files if they do not exist already."""
@@ -49,16 +52,28 @@ def init_posts(post_filenames):
         except:
             init_post(f)
         finally:
-            result.append(init_post(open(f, 'r+'))
+            result.append(init_post(open(f, 'r+b')))
     return result
 
-def init_post(post_file)name:
+def init_post(post_filename):
     """ Initializes a single XML post file. """
     with open(post_filename, 'r+') as post_file:
         root = ET.Element('postset')
         root.attrib['blogname'] = get_filename(post_file)
         root.attrib['tags'] = tags_dict[root.attrib['blogname']]
         ET.write(post_file, 'UTF-8', True)
+
+def generate_post(etree):
+    """ Adds a post child to the root level node and returns it. """
+    post = ET.Element('post')
+    etree.getroot().insert(0, post)
+    return post
+
+def make_child(element, tag):
+    return ET.SubElement(element, tag)
+
+def add_full_child(element, tag, text):
+    make_child(element, tag).text = text
 
 def open_post_files():
     """ Opens the XML post files for writing and returns them
@@ -67,8 +82,8 @@ def open_post_files():
     return init_posts(postsets)    
 
 def get_text_post(post, post_element):
-    title = post["title"]
-    body = post["body"]
+    add_full_child(post_element, 'title', post['title'])
+    add_full_child(post_element, 'body', post['body'])
 
 def get_photo_post(post, post_element):
     for photo in post["photos"]:
@@ -77,7 +92,7 @@ def get_photo_post(post, post_element):
             width = size["width"]
             height = size["height"]
             url = size["url"]
-
+    
 
 
 def get_video_post(post, post_element):
@@ -98,11 +113,14 @@ def get_audio_post(post, post_element):
     pass
 
 
-def get_post_element(post):
+
+def add_post_element(post, etree):
     """ Returns the ElementTree element representing a post."""
     attrs = {"href" : post["post_url"], "type" : post["type"], "date" : post["date"]}
-    post_element = ET.Element('post', attrs)
-    
+    post_element = generate_post(etree)
+    for attr in attrs.items():
+        add_full_child(post_element, attr[0], attr[1])
+
     post_type = attrs["type"]
 
     if post_type == "text":
@@ -120,8 +138,6 @@ def get_post_element(post):
     elif post_type == "audio":
         get_audio_post(post_element)
     
-    return post_element
-
 def update_posts(post_file):
     """ Updates the post set. """
     try:
@@ -135,9 +151,8 @@ def update_posts(post_file):
             new_posts = JSONDecoder().decode(rawjson)["response"]["posts"]
 
             for post in new_posts:
-                post_tree.insert(0, get_post_element(post))
-            
-            post_file.write(ET.tostring(post_tree))
+                get_post_element(post, etree)
+            save_etree(post_tree, post_file)
     except:
         pass
     finally:
