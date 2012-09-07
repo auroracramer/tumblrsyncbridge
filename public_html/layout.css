@@ -1,0 +1,88 @@
+body {
+  background: black url('background.png') repeat-x 50% 0;
+  font: normal 75% "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial,sans-serif;
+  color: #fff;
+  line-height: 1.4;
+  margin: 0px;
+  padding: 0px;
+  height: 186px;
+}
+
+#sitecontainer {
+  width: 910px;
+  margin: 0 auto;
+}
+#header {
+  font-size: 30px;
+  height: 143px;
+  font: bold "Lucida Sans Unicode", "Lucida Grande";
+  padding: 0 40px;
+  position: relative;
+}
+
+#navbar {
+  font-size: 12px;
+
+  position:absolute;
+  left:0;
+  bottom:0;
+  list-style-type: none;
+  padding: 1px 0px;
+}
+
+.navitem {
+  float:left;
+  padding: 0px 5px;
+}
+
+.navitem a {
+  float:left;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #323232;
+  border-radius: 2px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #C4C4C4;
+  background: rgb(130,130,130); /* Old browsers */
+  background: -moz-linear-gradient(45deg,  rgba(130,130,130,1) 0%, rgba(130,130,130,1) 50%, rgba(114,114,114,1) 51%, rgba(114,114,114,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(130,130,130,1)), color-stop(50%,rgba(130,130,130,1)), color-stop(51%,rgba(114,114,114,1)), color-stop(100%,rgba(114,114,114,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg,  rgba(130,130,130,1) 0%,rgba(130,130,130,1) 50%,rgba(114,114,114,1) 51%,rgba(114,114,114,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg,  rgba(130,130,130,1) 0%,rgba(130,130,130,1) 50%,rgba(114,114,114,1) 51%,rgba(114,114,114,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg,  rgba(130,130,130,1) 0%,rgba(130,130,130,1) 50%,rgba(114,114,114,1) 51%,rgba(114,114,114,1) 100%); /* IE10+ */
+  background: linear-gradient(45deg,  rgba(130,130,130,1) 0%,rgba(130,130,130,1) 50%,rgba(114,114,114,1) 51%,rgba(114,114,114,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#828282', endColorstr='#727272',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  padding: 1px 5px;
+}
+
+#content {
+  background: #181c21 url('bg_home_content.gif') top repeat-x;
+  padding: 4em 40px;
+  border-bottom: 1px solid #000;
+}
+h1 {
+  color:royalblue;
+  text-align:center;
+}
+
+.vid {
+  background: white;
+  padding: 20px 20px;
+  border-radius: 5px;
+  text-align:center;
+
+}
+
+.desc{
+  background-color:black;
+  padding: 10px 10px;
+  border-radius: 5px;
+  text-align: left;
+  float: left;
+  height: 270px;
+  width: 250px;
+}
+
+video{
+  padding: 10px 10px;
+}
